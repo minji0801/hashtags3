@@ -1,0 +1,97 @@
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>MAIN</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse@2.1.0/dist/parse.js"></script>
+	
+	<style type="text/css">
+		ul {
+			list-style-type: square;
+			padding: 10px 10px 10px 50px;
+    		margin-bottom: 5px;
+    		font-size: 20px;
+		}
+		.collection .collection-item {
+  		background-color: #fff;
+  		line-height: 1.5rem;
+  		padding: 10px 20px;
+  		margin: 0;
+  		border-bottom: 1px solid #e0e0e0;
+
+}
+	</style>
+</head>
+
+<body>
+	<input type="button" value="logout" style="width:60px;background-color: #2E9AFE; border: none;color:#fff;padding: 15px 0; text-align: center;
+ text-decoration: none;display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;border-radius:10px;" onclick="logout()">
+	<div class = "titleArea" style = "text-align:center; margin: 80">
+		<h1>D-day</h1>
+	</div>
+	<div id="add">
+		<input type="button" value="+" style="text-align:left; width:55px;background-color: #2E9AFE; border: none;color:#fff;padding: 15px 0; text-align: center;
+ text-decoration: none;display: inline-block;font-size: 20px; margin: 4px; cursor: pointer; border-radius:10px;" onclick="add()">
+ 		<input type="button" value="?" style="float: right; width:55px;background-color: #2E9AFE; border: none;color:#fff;padding: 15px 0; text-align: center;
+ text-decoration: none;display: inline-block;font-size: 20px; margin: 4px; cursor: pointer; border-radius:10px;" onclick="help()">
+	</div>
+	<div>
+		<ul id="addli" class="collection with-header col s3">
+     </ul>
+	</div>
+	
+	<script type="text/javascript">
+		Parse.initialize("kimminji");
+		Parse.serverURL = 'http://localhost:1337/parse'
+
+		
+		function help() {
+			window.location = "help.html";
+		}
+
+		function logout() {
+  			Parse.User.logOut()
+  			.then((user) => {
+    		alert("로그아웃 되었습니다.");
+   			 window.location = "login.html";
+  			});
+		}
+
+		function add() {
+			window.location = "input.html"
+		}
+
+		var Dday = Parse.Object.extend("Dday");
+		var day = new Dday();
+        var query = new Parse.Query(Dday);
+
+        query.ascending("content");
+        query.ascending("date");
+
+        query.find()
+        .then(function(results) {
+            for(var i = 0; i < results.length; i++) {
+                var result = results[i];
+
+            var z = result.get("date");
+		
+			var today = new Date(); 
+			var cup = new Date(z); 
+			var a = cup.getTime(); 
+			var b = today.getTime(); 
+			var day = Math.ceil((b-a)/24/60/60/1000) 
+      		
+		
+                $("#addli").append("<li class='collection-item col s3'>" + result.get("content") + " " + day + "일" +"</div></li>")
+            }
+        })
+
+       
+	</script>		
+</body>
+</html>

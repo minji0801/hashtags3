@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>메뉴</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse@2.1.0/dist/parse.js"></script>
+</head>
+<body>
+	<div id="menu" style="margin-top: 50px; margin-bottom: 50px">
+		<input type="button" value="홈" style="width: 200px; margin-right: 500px;font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="back()">
+		<input type="button" value="로그아웃" style="width: 200px; font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="logout()">
+	</div>
+	<div id="user" style="height: 400px; float: left;">
+		<img src="user.png" style="margin-top: 85px; margin-left: 100px; width: 250px; height: 250px">
+	</div>
+	<div id="username" style="margin-top: 230px; margin-bottom: 230px">
+		<span id="id" style="margin-left: 50px; font-size: 40px"></span>
+	</div>
+	<div id="line" style="font-size: 40px; color: #aaaaaa">
+		----------------------------------------------------------
+	</div>
+	<dir id="camera" style="margin-top: 20px; margin-bottom: 20px; float: left;">
+		<img src="camera.png" style="width: 100px; height: 100px;">	
+	</dir>
+	<div id="cameraname" style="margin-top: 40px">
+		<input type="button" value="카메라" style="width: 200px; margin-left: 50px; font-size: 50px; color: #5a5a5a; background-color: #ffffff; border: none; margin-bottom: 50px" onclick="camera()">
+	</div>
+	<div id="friend" style="margin-top: 20px; margin-bottom: 20px; margin-left: 35px; float: left;">
+		<img src="friend.png" style="width: 100px; height: 100px;">
+	</div>
+	<div id="friendname" style="margin-top: 40px">
+		<input type="button" value="친구목록" style="width: 200px; margin-left: 70px; font-size: 50px; color: #5a5a5a; background-color: #ffffff; border: none; margin-bottom: 50px" onclick="friend()">
+	</div>
+
+	
+	<script type="text/javascript">
+		Parse.initialize("kimminji");
+		Parse.serverURL = 'https://lit-tundra-86619.herokuapp.com/parse'
+
+		function back() {
+			window.location = "main2.html"
+		}		
+
+		function logout() {
+			Parse.User.logOut();
+				window.location = "login.html";
+		}
+		
+		$("#id").html("어서오세요! " + Parse.User.current().get("username") + "님");
+
+		function camera() {
+			window.location = "camera.html"
+		}
+
+		function friend() {
+			window.location = "friend.html"
+		}
+		
+		
+	</script>		
+</body>
+</html>

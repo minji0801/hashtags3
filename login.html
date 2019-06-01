@@ -1,0 +1,51 @@
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>어서오세요</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse@2.1.0/dist/parse.js"></script>
+</head>
+
+<body>
+	<div class = "titleArea" style="text-align: center; margin-top: 300px; margin-bottom: 200px; font-size: 40px; color: #FF7F50">
+		<h1>어서오세요</h1>
+	</div>
+	<div id="login"style = "text-align: center; font-size: 40px">
+		<h3> 아이디 </h3> <p><input type="text" id="id" style="width: 600px; height: 80px"> </p>
+		<p><h3>비밀번호</h3><p><input type="text" id="password" style="width: 600px; height: 80px"></p></p>
+	</div>
+
+	<div id="button" style="float: left; margin-top: 250px">
+		<input type="button" value="로그인" style="margin-right: 230px; width: 250px; font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="login()">
+		<input type="button" value="회원가입" style="margin-left: 220px; width: 250px; font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="signup()">
+	</div>
+
+	<script type="text/javascript">
+		Parse.initialize("kimminji");
+		Parse.serverURL = 'https://lit-tundra-86619.herokuapp.com/parse'
+
+		function signup() {
+			window.location = "joinus.html"
+		}
+
+		function login() {
+			var id = $("#id").val();
+			var password = $("#password").val();
+
+			Parse.User.logIn(id, password)
+			.then((user) => {
+				alert("♥ 어서오세요! " + user.get("username") + "님 ♥");
+				window.location = "main2.html"; 
+			}, (error) => {
+				alert("로그인을 실패하였습니다. : " + error.message);
+				$("#password").val("");
+			});
+		};		
+	</script>		
+</body>
+</html>

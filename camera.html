@@ -1,0 +1,57 @@
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>카메라</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse@2.1.0/dist/parse.js"></script>
+</head>
+<body>
+	<div id="menu" style="margin-top: 50px; margin-bottom: 50px; font-size: 30px">
+		<input type="button" name="back" value="뒤로" style="width: 200px; margin-right: 325px;font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="back()">
+		※ 파일선택을 클릭해주세요	
+	</div>
+	<div id="camera" style="margin-left: 50px; margin-top: 50px; width: 800px">
+		<input type="file" accept="image/*" capture="camera" id="camera" style="margin-right: 50px; font-size: 30px; width: 300px">
+		<input placeholder="Search" type="text" style="width: 400px; height: 80px; margin-right: 10px">
+		
+	</div>
+	<div>
+		<img id="frame" style="margin-top: 50px; margin-left: 50px; margin-right: 50px; margin-bottom: 50px; height: 900px">
+	</div>
+	<div>
+		
+	</div>
+	<div>
+		<h1>태그</h1>
+	</div>
+	<div style="">
+		<input type="button" value="보내기"  style="margin-right: 230px; width: 250px; font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="send()">
+		<input type="button" value="저장"  style="margin-left: 220px; width: 250px; font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="save()">
+	</div>
+
+	<script type="text/javascript">
+		Parse.initialize("kimminji");
+		Parse.serverURL = 'https://lit-tundra-86619.herokuapp.com/parse'
+
+		function back() {
+			window.location = "menu.html"
+		}
+
+  		var camera = document.getElementById('camera');
+  		var frame = document.getElementById('frame');
+ 
+  		camera.addEventListener('change', function(e) {
+   	 		var file = e.target.files[0]; 
+    		// Do something with the image file.
+    		frame.src = URL.createObjectURL(file);
+  		});
+
+  		function save() {
+  			
+  		}
+	</script>
+</body>
+</html>

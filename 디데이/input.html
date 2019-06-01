@@ -1,0 +1,56 @@
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>INPUT</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://npmcdn.com/parse@2.1.0/dist/parse.js"></script>
+</head>
+
+<body>
+	<input type="button" value="뒤로" style="width:60px;background-color: #2E9AFE; border: none;color:#fff;padding: 15px 0; text-align: center;
+ text-decoration: none;display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;border-radius:10px;" onclick="move()">
+	<div class = "titleArea" style = "text-align:center; margin: 80">
+		<h1>INPUT</h1>
+	</div>
+	<div id="login"style = "text-align:center">
+		<p><h4> 내용 </h4></p> 
+		<P>	<input type="text" id="content" style="width: 342; height: 39"> </p>
+		<p><h4> 날짜 </h4></p> 
+		<P>	<input type="date" id="date" style="width: 342; height: 39"> </p>	
+		<input type="button" value="complete" style="width:342px;background-color: #2E9AFE; border: none;color:#fff;padding: 15px 0; text-align: center;
+ text-decoration: none;display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;border-radius:10px;" onclick="saveContent()">
+
+	</div>
+
+	<script type="text/javascript">
+		Parse.initialize("kimminji");
+		Parse.serverURL = 'http://localhost:1337/parse'
+
+	function move() {
+		window.location = "main.html";
+	}
+		
+	function saveContent() {
+ 		var Dday = Parse.Object.extend("Dday");
+  		var day = new Dday();
+  		
+  		day.set("playname", Parse.User.current().get("username"));
+  		day.set("content", content);
+  		day.set("date", date);
+
+  		day.save()
+  		.then((dday) => {
+  			
+			alert("저장 완료!");
+			window.location = "main.html"
+		}, (error) => {
+			alert("다시 입력해주세요. : " + error.message);
+		});		
+	}	
+	</script>
+</body>
+</html>

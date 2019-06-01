@@ -1,0 +1,77 @@
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>친구목록</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://npmcdn.com/parse@2.1.0/dist/parse.js"></script>
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+</head>
+<body>
+	<div id="menu" style="margin-top: 50px; margin-bottom: 50px; font-size: 50px">
+		<input type="button" name="back" value="뒤로" style="width: 200px; margin-right: 170px;font-size: 50px; color: #2E9AFE; background-color: #ffffff; border: none" onclick="back()">
+		친구목록
+	</div>
+	<div id="add" style="height: 300px; float: left;">
+		<input type="text" id="search" style="margin-top: 85px; margin-left: 50px; width: 750px; height: 80px">
+	</div>
+	<div id="addicon" style="height: 100px;margin-top: 130px; margin-bottom: 130px">
+		<button style="background-color: #ffffff; border:none; margin-left: 50px" onclick="add()"><img src="add.png" style="width: 80px; height: 80px"></button>
+	</div>
+	<div>
+		dd
+	</div>
+	<div class="ui-widget">
+
+  		<label for="friendadd">친구추가 </label>
+
+  		<input id="friendadd">
+
+	</div>
+	<ol id="addli" class="collection with-header col s3">
+	<script type="text/javascript">
+		Parse.initialize("kimminji");
+		Parse.serverURL = 'https://lit-tundra-86619.herokuapp.com/parse'
+
+		var User = Parse.Object.extend("User");
+        var query = new Parse.Query(User);
+        query.ascending("username");
+        query.find()
+        .then.($(function(results) {
+            for(var i = 0; i < results.length; i++) {
+                var result = results[i];
+                $("#addli").append(result.get("username"))
+            }
+        }))
+		$(function() {
+    		var availableCity = ["test1","부산","대구","광주","울산"];
+    		$("#friendadd").autocomplete({		//자동완성 기능 만들기
+        		source: availableCity,		//타이핑시 보여질 내용
+        		select: function(event, ui) {		//아이템 선택시 실행
+            		console.log(ui.item);
+        		},
+        		focus: function(event, ui) {		
+            		return false;
+            		//event.preventDefault();
+        		}
+   			});
+		});
+
+
+		function back() {
+			window.location = "menu.html"
+		}
+
+		function add() {
+
+		}
+
+	</script>
+</body>
+</html>
